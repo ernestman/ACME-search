@@ -1,68 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ACME Co. Search
 
-## Available Scripts
+## Problem
 
-In the project directory, you can run:
+Alice is about to head into a meeting with Acme Co. She visits https://foo.com which has a search box where she types "Acme Co." and gets content from various data sources (listed below) relevant to the upcoming meeting.
 
-### `yarn start`
+Data Sources:
+- Contacts
+- Dropbox file
+- Slack message/thread
+- Calendar Entry
+- Twitter
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Each item has a ```matching_terms``` field, you could treat that as the set of query terms which will retrieve that item (so you don't have to bother with actually searching content).
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Feel free to edit the schema, add or remove entries, etc. The attached files are just a starting point. For example, if you'd like to add more random tweets to demonstrate scrolling updates, feel free to generate random ones. The ordering of search results is unspecified, feel free to do whatever you feel like. Do share any thoughts you have about ranking though.
 
-### `yarn test`
+## Requirements
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Build a search UI that supports searching over the items contained in the JSON files. There should be a search box where the user can type, press a button, and see content that matches the search query.
 
-### `yarn build`
+Additionally, please pick one of these "advanced" features to implement:
+- User interaction with search results (pin, delete, tagging)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to run the project
+- Install Node and NPM 
+- Open terminal/command line and clone the git repository
+- Run ```npm install```
+- Run ```npm start```
+- Navigate to (http://localhost:3000)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Main Features
+- Implemented a search UI where users can search over items contained in JSON files
+- The search box produces search results for items that match the query
+- Implemented user interaction with search results, where users can pin and unpin certain results and items from the search data
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Approach
+- One of the main design decisions/tradeoffs that I had to make for this project was how I was going to structure the application state for the pinned items. Using an array to as the main data structure was not optimal, because pinned items should be unique and users should not be able to pin the same item more than once. I figured, using a JavaScript set would be the most optimal because it would only add unique items to the set of pinned items. 
+- Another main design decision I made was the use React Hooks. React hooks make it easier to follow and make our code cleaner to read when handling local state and we can group different entities separately instead of keeping one large object as the main structure of our application state. 
+- The functionality of the search bar is improved by adding logic using keyboard navigation, allowing the user to search results by hitting the enter key when searching for items.
